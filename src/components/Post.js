@@ -1,10 +1,19 @@
 import React from "react";
-import classes from "./Home.module.css";
+import classes from "./HomePost.module.css";
 import { TiThumbsUp, TiThumbsDown, TiDocumentText } from "react-icons/ti";
+import { motion } from "framer-motion";
 
 const Post = () => {
   return (
-    <div className={classes.post_div}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: { duration: 0.5 },
+      }}
+      exit={{ opacity: 0, transition: { duration: 0.5 } }}
+      className={classes.post_div}
+    >
       <div>
         <p className={classes.post_hash}>Accessibillity : None</p>
         <img
@@ -50,16 +59,20 @@ const Post = () => {
         </div>
 
         <div className={classes.comments}>
-        <img
-              className={classes.card_avatar}
-              src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg?fit=640,427"
-            ></img>
-           <div>
+          <img
+            className={classes.card_avatar}
+            src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg?fit=640,427"
+          ></img>
+          <div>
             <p>@MILENKO</p> <p className={classes.post_date}>{Date()}</p>
-            <p>Place to visit at least once a year. Never had better enjoyment and relaxation in my life. 5/5 </p></div>
+            <p>
+              Place to visit at least once a year. Never had better enjoyment
+              and relaxation in my life. 5/5{" "}
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

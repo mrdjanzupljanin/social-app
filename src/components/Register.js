@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import classes from "./Login.module.css";
-import logo from "../images/logo.png";
+import classes from "./LoginRegister.module.css";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
@@ -14,12 +14,10 @@ const Register = () => {
         textAlign: "center",
         transition: { duration: 0.5 },
       }}
-      exit={{ x: window.innerWidth, opacity: 0, transition: { duration: 0.5 } }}
+      exit={{ opacity: 0, transition: { duration: 0.5 } }}
     >
       <div className={classes.overlay}>
-        <div className={classes.logo}>
-          <img src={logo} />
-        </div>
+        <div className={classes.logo}></div>
         <div className={classes.login_form}>
           <h1>
             Create new Account <span className={classes.dot}>.</span>
@@ -65,9 +63,9 @@ const Register = () => {
           <hr className={classes.hr}></hr>
           <div className={classes.already}>
             Already have an Account?
-            <a href="/register" className={classes.dot}>
-             {` Log In!`}
-            </a>
+            <Link to="/login" className={classes.dot}>
+              {` Log In!`}
+            </Link>
           </div>
         </div>
       </div>

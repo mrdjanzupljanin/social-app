@@ -1,0 +1,135 @@
+.center{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.profile{
+    width: 50%;
+    background-color: white;
+    
+}
+
+.cover{
+    width: 99%;
+    border-radius: 15px;
+}
+
+
+.profile_picture{
+    border-radius: 50%;
+    width: 140px;
+    border: white 4px solid;
+    margin-top: -100px;
+    margin-left: -270px;
+}
+
+.profile_info{
+    background-color: white;
+
+
+}
+
+.profile_info p {
+    margin-top: -50px;
+    padding-bottom: 20px;
+}
+
+.profile_info h4{
+    margin-top: -50px;
+    padding-bottom: 20px;
+}
+
+.two_rows{
+    display: flex;
+    justify-content: space-around;
+    text-align: left;
+  
+}
+
+.information{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
+
+.information_content{
+    padding-left: 30px;
+    padding-right: 60px;
+ 
+}
+
+.likes_content{
+    padding-left: 30px;
+    padding-right: 60px;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+ 
+}
+
+.likes_content h2{
+  
+    margin-top: 50px;
+    font-size: 40px;
+    color:#02f982; ;
+    font-weight: 400;
+}
+
+.likes_content p {
+    margin-top: 60px;
+   padding: 10px;
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+   
+}
+.card_info{
+    text-align: left;
+    display: flex;
+    
+}
+
+.card_image{
+    width: 80%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    opacity: 97%;
+    filter:blur(0.5px)
+}
+
+.card_date{
+    font-size: 13px;
+    color: dimgrey;
+    margin-top: -10px;
+    margin-left: -90px;
+
+}
+.like_container {
+    font-size: 25px;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.card_avatar{
+    border-radius: 50%;
+    width: 50px;
+    height: 45px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 20px;
+}
+
+.card_place{
+    font-size: 16px;
+    margin-top: 0px;
+    color: dimgray;
+}
+.icon{
+    padding: 4px;
+    margin-right: 10px;
+}
+
+
