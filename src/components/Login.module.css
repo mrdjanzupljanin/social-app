@@ -1,0 +1,121 @@
+body{
+        background: url('../images/bcgrd.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+      
+}
+
+.overlay{
+   position: absolute;
+    width: 31%;
+    height: 99.9%;
+    left:0;
+    top: 0.44px;
+    background: #282A37;
+   text-align: left;
+    filter: blur(0.3px);
+    opacity: 97%;
+}
+
+.logo img{
+    width: 13vh;
+    height: 10vh;
+
+
+}
+
+.login_form{
+margin: 50px;
+   color: azure;
+}
+
+.dot{
+    color: rgb(22, 139, 69);
+}
+
+.input {
+    background: none;
+   border: none;
+   border-bottom: rgb(255, 255, 255) 1px solid;
+   width: 300px;
+   padding: 10px;
+   font-size: 20px;
+   margin-bottom: 10px;
+}
+
+.forgot{
+ text-align: right;
+ margin-top: 10px;
+ margin-right: 50px;
+}
+
+.already{
+    text-align: center;
+
+}
+
+
+
+.login_btn {
+    margin-top: 20px;
+    width: 340px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: none;
+    background-color: #00B960;
+    color: azure;
+}
+
+.login_btn:hover{
+    background-color: #005d30;
+    cursor: pointer;
+    transition: ease-out 0.6s;
+   
+}
+
+.hr{
+    width: 340px;
+    margin-top: 17px;
+    background-color:  #00B960;
+    margin-right: 70px;
+   
+}
+
+.two_rows{
+    display: flex;
+   
+}
+
+.two_rows_checkbox{
+    display: flex;
+    justify-content: left;
+    margin-right: 50px;
+
+}
+
+.two_rows input {
+    width: 34%;
+    margin-right: 24px;
+    
+}
+
+.check {
+    transition: box-shadow .7s;
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    /* more style */
+    margin: 10;
+    margin-right:5px;
+  }
+  .check:checked { 
+    box-shadow: inset 0 0 0 20px #00B960;
+  }
