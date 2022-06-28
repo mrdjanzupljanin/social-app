@@ -1,10 +1,10 @@
 import React from "react";
-import classes from "../CommonStyles.module.css";
+import classes from "../styles/CommonStyles.module.css";
 import { TiThumbsUp, TiThumbsDown, TiDocumentText } from "react-icons/ti";
 
 const PostCard = () => {
   return (
-    <div class={classes.card}>
+    <div className={classes.card}>
       <div>
         <div className={classes.card_info}>
           <img
@@ -26,9 +26,16 @@ const PostCard = () => {
       />
       <div className={classes.like_container}>
         <div>
-          <TiThumbsUp className={classes.icon} />{" "}
+          <TiThumbsUp className={classes.icon}></TiThumbsUp>
           <TiThumbsDown className={classes.icon} />{" "}
           <TiDocumentText className={classes.icon} />
+          <div className={classes.number_likes}>
+            <p>
+              <span>0</span>
+              <span>0</span>
+              <span>0</span>
+            </p>
+          </div>
         </div>{" "}
         <div>
           <p className={classes.card_place}>Place Name(Place)</p>

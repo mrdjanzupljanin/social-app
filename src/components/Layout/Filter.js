@@ -1,14 +1,14 @@
 import React from "react";
-import classes from "../CommonStyles.module.css";
 
-const Filter = (props) => {
+import classes from "../styles/CommonStyles.module.css";
+
+const Filter = ({ texts }) => {
   return (
     <div className={classes.filter}>
-      {" "}
       <div className={classes.filter_container}>
-        <p>{`${props.text1}`}</p>
-        <p>{`${props.text2}`}</p>
-        <p>{`${props.text3}`}</p>
+        {texts.map((text) => (
+          <p className={classes.p_filter}>{text}</p>
+        ))}
       </div>
     </div>
   );

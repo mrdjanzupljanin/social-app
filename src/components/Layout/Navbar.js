@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import classes from "../CommonStyles.module.css";
+import classes from "../styles/CommonStyles.module.css";
 import { HiLogout } from "react-icons/hi";
 
 const Navbar = () => {

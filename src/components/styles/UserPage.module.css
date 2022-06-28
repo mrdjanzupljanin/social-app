@@ -131,5 +131,11 @@
     padding: 4px;
     margin-right: 10px;
 }
+.icon:hover{
+    border-radius: 20px;
+    background-color: #02f982;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
 
 

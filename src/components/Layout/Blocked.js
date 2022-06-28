@@ -1,7 +1,7 @@
 import React from "react";
-import classes from "../CommonStyles.module.css";
-import { FiFrown, FiXCircle } from "react-icons/fi";
+import classes from "../styles/CommonStyles.module.css";
 import MotionDiv from "./MotionDiv";
+import { FiFrown, FiXCircle } from "react-icons/fi";
 
 const Blocked = () => {
   return (

@@ -1,9 +1,9 @@
 import React from "react";
-import classes from "../CommonStyles.module.css";
-import { BsQuestionDiamondFill } from "react-icons/bs";
+import classes from "../styles/CommonStyles.module.css";
 import MotionDiv from "./MotionDiv";
+import { BsQuestionDiamondFill } from "react-icons/bs";
 
-const DeleteComment = (props) => {
+const DeleteComment = ({ text }) => {
   return (
     <MotionDiv>
       <div className={classes.error_container}>
@@ -11,7 +11,7 @@ const DeleteComment = (props) => {
           <BsQuestionDiamondFill className={classes.question_mark} />
           <div>
             <p>
-              Are you sure you want to{<br></br>} {props.text}
+              Are you sure you want to{<br></br>} {text}
             </p>
           </div>
           <div className={classes.two_rows}>

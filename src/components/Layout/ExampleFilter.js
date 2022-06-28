@@ -1,10 +1,11 @@
 import React from "react";
 import Filter from "./Filter";
 
-const ExampleFilter = (props) => {
+const ExampleFilter = () => {
+  const texts = ["vau", "lala", "stanko"];
   return (
     <div>
-      <Filter text1={"vau"} text2={"lala"} text3={"stanko"} />
+      <Filter texts={texts} />
     </div>
   );
 };

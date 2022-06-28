@@ -1,19 +1,20 @@
 import React from "react";
+
+import classes from "../styles/motionDiv.module.css";
 import { motion } from "framer-motion";
 
-const MotionDiv = (props) => {
+const MotionDiv = ({ children }) => {
   return (
     <motion.div
-      initial={{ width: 0, opacity: 0 }}
+      className={classes.container}
+      initial={{ opacity: 0 }}
       animate={{
-        width: "auto",
         opacity: 1,
-        textAlign: "center",
         transition: { duration: 0.5 },
       }}
-      exit={{ x: window.innerWidth, opacity: 0, transition: { duration: 0.5 } }}
+      exit={{ opacity: 0, transition: { duration: 0.5 } }}
     >
-      {props.children}
+      {children}
     </motion.div>
   );
 };
