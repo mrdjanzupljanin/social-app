@@ -1,6 +1,8 @@
 .home_cards{
     display: flex;
     justify-content: center;
+    text-align: center;
+    width: auto;
 }
 
 .card{
@@ -8,7 +10,6 @@
     width: 40%;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-   
 }
 
 .card_avatar{
@@ -22,13 +23,11 @@
 .card_info{
     text-align: left;
     display: flex;
-    
 }
 
 .post_info{
-
     display: flex;
-justify-content: center;    
+    justify-content: center;    
 }
 
 .card_image{
@@ -62,7 +61,6 @@ justify-content: center;
     padding: 5px;
     width: 30%;
     margin-left: 10px;
-    
 }
 
 .card_date{
@@ -70,13 +68,11 @@ justify-content: center;
     color: dimgrey;
     margin-top: -10px;
     margin-left: -90px;
-
 }
 
 .post_date{
     font-size: 13px;
     color: dimgrey;
-    
 }
 
 .like_container {
@@ -110,9 +106,6 @@ justify-content: center;
     border-radius: 4px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     display: flex;
-
-    
-    
 }
 
 .post_image{
@@ -136,8 +129,6 @@ justify-content: center;
 
 .textarea{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    
-    
 }
 
 .textarea textarea {
@@ -179,5 +170,4 @@ justify-content: center;
     border-radius: 4px;
 margin-left: 30px;
 margin-top: 20px;
-    
 }

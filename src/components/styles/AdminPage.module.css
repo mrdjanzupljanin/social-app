@@ -1,0 +1,62 @@
+.admin_container{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.admin_content{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    margin: 15px 100px;
+    border-radius: 22px;
+    padding: 13px;
+}
+
+.two_rows{
+    display: flex;
+    justify-content: space-around;
+}
+
+.green_span{
+   color: #00B960
+}
+
+.filter_icon{
+   margin: 2px;
+   padding: 5px;
+}
+
+.filter_icon:hover{
+    background-color: #00B960;
+    border-radius: 20px;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+.user_row{
+display: flex;
+justify-content: space-between;
+border-radius: 22px;
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+padding:0px 32px 12px 10px;
+text-align: center;
+}
+
+.admin_avatar{
+    width: 50px;
+    border-radius: 50%;
+}
+
+.admin_block_icon{
+   display: flex;
+   justify-content: space-around;
+   padding: 5px;
+   border: none;
+   background: none;
+}
+
+.admin_block_icon:hover{
+    background-color: #f929004a;
+    transition: 0.3s ease-out;
+    border-radius: 20px;
+    cursor: pointer;
+}
