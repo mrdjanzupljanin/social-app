@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "../styles/LoginRegister.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MotionDiv from "../Layout/MotionDiv";
 import { useFormik } from "formik";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import authContext from "../../store/context";
+import {
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import { auth } from "../../firebase-config";
+
 const Login = () => {
+  const navigate = useNavigate();
+  const ctx = useContext(authContext);
   const onSubmit = async (values, actions) => {
     const user = await signInWithEmailAndPassword(
       auth,
       values.email,
       values.password
     );
+    localStorage.setItem("isAuth", true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
     actions.resetForm();
     console.log(auth.currentUser.email);
+    ctx.setIsAuth(true);
+    navigate("/");
   };
   const { values, handleSubmit, isSubmitting, handleChange } = useFormik({
     initialValues: {
@@ -23,6 +33,16 @@ const Login = () => {
     },
     onSubmit,
   });
+
+  const sendPasswordReset = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("Password reset link sent!");
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
   return (
     <MotionDiv>
       <div className={classes.overlay}>
@@ -51,7 +71,14 @@ const Login = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className={classes.forgot}>Forgot Password?</div>
+            <div className={classes.forgot}>
+              <p
+                className={classes.p_forgot}
+                onClick={() => sendPasswordReset(values.email)}
+              >
+                Forgot Password?
+              </p>
+            </div>
             <button
               type="submit"
               disabled={isSubmitting}

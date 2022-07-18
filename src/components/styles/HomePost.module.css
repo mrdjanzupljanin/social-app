@@ -3,6 +3,7 @@
     justify-content: center;
     text-align: center;
     width: auto;
+
 }
 
 .card{
@@ -10,6 +11,7 @@
     width: 40%;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
+    
 }
 
 .card_avatar{
@@ -18,16 +20,18 @@
     height: 45px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin: 20px;
+    object-fit: cover;
 }
 
 .card_info{
     text-align: left;
     display: flex;
+  
 }
 
 .post_info{
     display: flex;
-    justify-content: center;    
+    justify-content: center;
 }
 
 .card_image{
@@ -83,7 +87,6 @@
 
 .card_place{
     font-size: 16px;
-    margin-top: 0px;
     color: dimgray;
 }
 
@@ -114,6 +117,7 @@
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin-left: 10px;
+    object-fit: cover;
 }
 
 .right_container{
@@ -168,6 +172,25 @@
     height: auto;
     width: 90%;
     border-radius: 4px;
-margin-left: 30px;
-margin-top: 20px;
+transition: 0.5s ease;
+
+}
+
+.scroll{
+overflow-y: scroll;  
+height: 20rem;  
+
+}
+
+.del_btn{
+    font-size: 20px;
+    padding: 0.5rem;
+}
+
+.del_btn:hover{
+    border-radius: 5rem;
+    background-color: #00b96019;
+    transition: 1s ease;
+    cursor: pointer;
+    
 }

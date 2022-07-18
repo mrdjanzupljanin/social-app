@@ -1,11 +1,65 @@
 import React from "react";
 import classes from "../styles/UserPage.module.css";
-
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Navbar from "../Layout/Navbar";
-import { TiThumbsUp, TiThumbsDown, TiDocumentText } from "react-icons/ti";
 import MotionDiv from "../Layout/MotionDiv";
+import { auth, db } from "../../firebase-config";
+import { collection, query, where, getDocs, doc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import PostCard from "../Layout/PostCard";
+import ZoomImage from "../Layout/ZoomImage";
 
 const UserPage = () => {
+  let { userId } = useParams();
+  const usersCollectionRef = collection(db, "users");
+  const [currentUser, setCurrentUser] = useState({});
+  const [profile, setProfile] = useState({});
+  const [posts, setPosts] = useState({});
+  const [insight, setInsight] = useState({});
+  const [zoom, setZoom] = useState(false);
+
+  const postsCollectionRef = collection(db, "posts");
+  const insightsCollectionRef = collection(db, "insights");
+
+  useEffect(() => {
+    const effect = async () => {
+      const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user));
+      return unsub;
+    };
+    const getUser = async () => {
+      const profile = query(usersCollectionRef, where("id", "==", userId));
+      const querySnapshot = await getDocs(profile);
+      querySnapshot.forEach((doc) => setProfile(doc.data()));
+    };
+    const getPosts = async () => {
+      try {
+        const q = query(postsCollectionRef, where("author.id", "==", userId));
+        const data = await getDocs(q);
+        setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getInsights = async () => {
+      const q = query(insightsCollectionRef, where("author.id", "==", userId));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => setInsight(doc.data()));
+      console.log(insight);
+    };
+
+    effect();
+    getUser();
+    getPosts();
+    getInsights();
+  }, []);
+
+  const zoomHandler = () => {
+    setZoom(true);
+  };
+  const exitZoom = () => {
+    setZoom(false);
+  };
   return (
     <>
       <Navbar />
@@ -15,15 +69,28 @@ const UserPage = () => {
             <div>
               <img
                 className={classes.cover}
-                src="https://www.timelinecoverphotomaker.com/sites/default/files/facebook-cover-photos/2013/11/pink-flower-tree-facebook-cover-photo.jpg"
+                src={
+                  profile?.cover
+                    ? profile.cover
+                    : "https://www.fil.ion.ucl.ac.uk/wp-content/uploads/2019/05/grey-background.jpg"
+                }
+                alt="rave"
               ></img>
               <div className={classes.profile_info}>
                 <img
                   className={classes.profile_picture}
-                  src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
+                  onClick={zoomHandler}
+                  src={
+                    profile.image?.length
+                      ? profile.image
+                      : "https://mpspathology.com/wp-content/uploads/2022/01/Profile-Male.jpg"
+                  }
+                  alt="mio"
                 ></img>
-                <h4>Marie Alabama</h4>
-                <p>@mariealabama22</p>{" "}
+                <h4>
+                  {profile.firstName} {profile.lastName}
+                </h4>
+                <p>@{profile.username}</p>{" "}
               </div>
             </div>
 
@@ -31,54 +98,26 @@ const UserPage = () => {
               <div className={classes.information}>
                 <div className={classes.information_content}>
                   <h4>User Information</h4>
-                  <p>johnameric@gmail.com</p>
+                  <p>{profile.email}</p>
                   <p>User</p>
-                  <p>12/06/96</p>
+                  <p>{profile.birthDay}</p>
                 </div>
               </div>
               <div className={classes.information}>
                 <div className={classes.likes_content}>
-                  <p>Likes</p>
-                  <h2>23</h2>
-                  <p>Comments</p> <h2>23</h2>
+                  <p>Likes</p> <h2>{insight?.author && insight.author.likes}</h2>
+                   <p>Comments</p> <h2>{insight?.author && insight.author.comments}</h2>
                   <p>Posts</p>
-                  <h2>23</h2>
+                  <h2>{posts && posts.length}</h2>
                 </div>
               </div>
             </div>
-            <div class={classes.card}>
-              <div>
-                <div className={classes.card_info}>
-                  <img
-                    className={classes.card_avatar}
-                    src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg?fit=640,427"
-                  ></img>
-                  <h4>
-                    <b>John Doe</b>
-                  </h4>
-                </div>
-                <p className={classes.hash}>Accessibillity : None</p>
-              </div>
-              <p className={classes.card_date}>{Date()}</p>
-              <p>This lovely place. I fell in love with it.</p>
-              <img
-                className={classes.card_image}
-                src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Altja_j%C3%B5gi_Lahemaal.jpg"
-                alt="Avatar"
-              />
-              <div className={classes.like_container}>
-                <div>
-                  <TiThumbsUp className={classes.icon} />{" "}
-                  <TiThumbsDown className={classes.icon} />{" "}
-                  <TiDocumentText className={classes.icon} />
-                </div>{" "}
-                <div>
-                  <p className={classes.card_place}>Place Name(Place)</p>
-                </div>
-              </div>
+            <div>
+              {posts?.length && posts.map((post) => <PostCard post={post} />)}
             </div>
           </div>
         </div>
+        {zoom && <ZoomImage exitZoom={exitZoom} image={profile.image} />}
       </MotionDiv>
     </>
   );

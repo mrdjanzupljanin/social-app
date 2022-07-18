@@ -12,15 +12,21 @@
 .cover{
     width: 99%;
     border-radius: 15px;
+    height: 20rem;
+    object-fit: cover;
 }
 
 
 .profile_picture{
     border-radius: 50%;
-    width: 140px;
+    width: 10rem;
+    height: 10rem;
     border: white 4px solid;
     margin-top: -100px;
     margin-left: -270px;
+    object-fit: cover;
+    cursor: pointer;
+
 }
 
 .profile_info{
@@ -32,11 +38,13 @@
 .profile_info p {
     margin-top: -50px;
     padding-bottom: 20px;
+   
 }
 
 .profile_info h4{
     margin-top: -50px;
     padding-bottom: 20px;
+    margin-left: 2rem;
 }
 
 .two_rows{
