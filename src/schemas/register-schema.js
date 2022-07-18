@@ -20,6 +20,7 @@ export const basicSchema = yup.object().shape({
     firstName: yup.string().required(),
     lastName: yup.string().required(),
     username: yup.string().required(),
+    isAdmin: yup.boolean().oneOf([false, 'Check if you are admin'])
   });
 
   export const postSchema = yup.object().shape({

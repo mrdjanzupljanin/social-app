@@ -8,8 +8,10 @@ import { collection, addDoc } from "firebase/firestore";
 import { basicSchema } from "../../schemas/register-schema";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase-config";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate()
   const usersCollectionRef = collection(db, "users");
 
   const onSubmit = async (values, actions) => {
@@ -25,10 +27,15 @@ const Register = () => {
       email: values.email,
       birthDay: values.birthDay,
       id: user.user.uid,
+      image: values.image,
+      cover: values.cover,
+      admin: values.admin,
+      blocked: false
     });
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
     actions.resetForm();
+    navigate('/')
   };
   const {
     values,
@@ -48,7 +55,10 @@ const Register = () => {
       confirmPassword: "",
       birthDay: "",
       user: "",
-      admin: "",
+      admin: false,
+      image: '',
+      cover:''
+      
     },
     validationSchema: basicSchema,
     onSubmit,
@@ -193,19 +203,32 @@ const Register = () => {
                 {errors.birthDay ? errors.birthDay : ""}
               </p>
             </div>
+            <div>
+                  <input
+                    name="image"
+                    className={classes.input}
+                    placeholder="Add Avatar Url..."
+                    value={values.image}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div>
+                  <input
+                    name="cover"
+                    className={classes.input}
+                    placeholder="Add Cover Url..."
+                    value={values.cover}
+                    onChange={handleChange}
+                  />
+                </div>
             <div className={classes.two_rows_checkbox}>
-              <input
-                type="checkbox"
-                className={classes.check}
-                name="user"
-                value="User"
-              />
-              <label htmlFor="user">User</label>
               <input
                 className={classes.check}
                 type="checkbox"
                 name="admin"
-                value="Admin"
+                value={values.admin === true}
+                onChange={handleChange}
+                
               />
               <label htmlFor="admin">Admin</label>
             </div>

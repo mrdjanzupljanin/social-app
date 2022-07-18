@@ -9,6 +9,7 @@
     margin: 15px 100px;
     border-radius: 22px;
     padding: 13px;
+    
 }
 
 .two_rows{
@@ -39,11 +40,15 @@ border-radius: 22px;
 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 padding:0px 32px 12px 10px;
 text-align: center;
+height: 3rem;
+
 }
 
 .admin_avatar{
     width: 50px;
     border-radius: 50%;
+    object-fit: cover;
+    
 }
 
 .admin_block_icon{
@@ -52,6 +57,7 @@ text-align: center;
    padding: 5px;
    border: none;
    background: none;
+   width: 5rem;
 }
 
 .admin_block_icon:hover{
