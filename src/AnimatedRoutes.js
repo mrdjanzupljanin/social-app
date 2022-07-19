@@ -11,7 +11,6 @@ import Ex from "./components/Layout/Ex";
 import AdminPage from "./components/pages/AdminPage";
 import Blocked from "./components/Layout/Blocked";
 
-
 const AnimatedRoutes = () => {
   const location = useLocation();
   return (

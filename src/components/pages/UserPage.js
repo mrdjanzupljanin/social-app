@@ -1,19 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "../styles/UserPage.module.css";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Navbar from "../Layout/Navbar";
 import MotionDiv from "../Layout/MotionDiv";
-import { auth, db } from "../../firebase-config";
-import { collection, query, where, getDocs, doc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
 import PostCard from "../Layout/PostCard";
 import ZoomImage from "../Layout/ZoomImage";
+import { useParams } from "react-router-dom";
+import { db } from "../../firebase-config";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 const UserPage = () => {
   let { userId } = useParams();
   const usersCollectionRef = collection(db, "users");
-  const [currentUser, setCurrentUser] = useState({});
   const [profile, setProfile] = useState({});
   const [posts, setPosts] = useState({});
   const [insight, setInsight] = useState({});
@@ -23,10 +20,6 @@ const UserPage = () => {
   const insightsCollectionRef = collection(db, "insights");
 
   useEffect(() => {
-    const effect = async () => {
-      const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user));
-      return unsub;
-    };
     const getUser = async () => {
       const profile = query(usersCollectionRef, where("id", "==", userId));
       const querySnapshot = await getDocs(profile);
@@ -47,8 +40,6 @@ const UserPage = () => {
       querySnapshot.forEach((doc) => setInsight(doc.data()));
       console.log(insight);
     };
-
-    effect();
     getUser();
     getPosts();
     getInsights();
@@ -90,7 +81,7 @@ const UserPage = () => {
                 <h4>
                   {profile.firstName} {profile.lastName}
                 </h4>
-                <p>@{profile.username}</p>{" "}
+                <p>@{profile.username}</p>
               </div>
             </div>
 
@@ -105,8 +96,10 @@ const UserPage = () => {
               </div>
               <div className={classes.information}>
                 <div className={classes.likes_content}>
-                  <p>Likes</p> <h2>{insight?.author && insight.author.likes}</h2>
-                   <p>Comments</p> <h2>{insight?.author && insight.author.comments}</h2>
+                  <p>Likes</p>
+                  <h2>{insight?.author && insight.author.likes}</h2>
+                  <p>Comments</p>
+                  <h2>{insight?.author && insight.author.comments}</h2>
                   <p>Posts</p>
                   <h2>{posts && posts.length}</h2>
                 </div>

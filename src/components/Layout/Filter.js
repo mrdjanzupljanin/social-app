@@ -1,5 +1,4 @@
 import React from "react";
-
 import classes from "../styles/CommonStyles.module.css";
 
 const Filter = ({ texts }) => {

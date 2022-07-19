@@ -14,7 +14,7 @@ import {
   increment,
 } from "firebase/firestore";
 import { db, auth } from "../../firebase-config";
-import { postSchema } from "../../schemas/register-schema";
+import { postSchema } from "../../schemas/post-schema";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 
@@ -96,7 +96,7 @@ const AddPost = () => {
               <img
                 className={classes.add_image}
                 src="https://images.theconversation.com/files/137600/original/image-20160913-4948-6fyxz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop"
-              ></img>{" "}
+              ></img>
               <div className={classes.centered}>{`NEW POST`}</div>
             </div>
             <div className={classes.login_form}>
@@ -104,9 +104,7 @@ const AddPost = () => {
                 Add New Post <span className={classes.dot}>.</span>
               </h1>
               <form onSubmit={handleSubmit} autoComplete="off">
-                {" "}
                 <div className={classes.two_rows}>
-                  {" "}
                   <input
                     className={classes.input}
                     name="name"

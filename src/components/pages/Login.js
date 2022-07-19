@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import classes from "../styles/LoginRegister.module.css";
-import { Link, useNavigate } from "react-router-dom";
 import MotionDiv from "../Layout/MotionDiv";
-import { useFormik } from "formik";
 import authContext from "../../store/context";
+import { useFormik } from "formik";
+import { Link, useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -92,7 +92,7 @@ const Login = () => {
 
           <hr className={classes.hr}></hr>
           <div className={classes.already}>
-            Don't have an account?{" "}
+            Don't have an account?
             <Link to="/register" className={classes.dot}>
               Register?
             </Link>

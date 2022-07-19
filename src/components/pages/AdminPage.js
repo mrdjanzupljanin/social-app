@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import classes from "../styles/AdminPage.module.css";
-import { getDocs, collection, onSnapshot, doc, query, where } from "firebase/firestore";
-import { db } from "../../firebase-config";
 import Navbar from "../Layout/Navbar";
-import { BsListOl } from "react-icons/bs";
 import Filter from "../Layout/Filter";
 import BlockButton from "../Layout/BlockButton";
-import { setDoc } from "firebase/firestore";
-
+import { collection, onSnapshot, doc, query, where, setDoc } from "firebase/firestore";
+import { db } from "../../firebase-config";
+import { BsListOl } from "react-icons/bs";
 
 const AdminPage = () => {
   const [users, setUsers] = useState({});
@@ -16,7 +14,7 @@ const AdminPage = () => {
   const texts = ["Date", "Birthday", "Name"];
 
   const usersCollectionRef = collection(db, "users");
-  const q = query(usersCollectionRef, where("admin", '==', false))
+  const q = query(usersCollectionRef, where("admin", "==", false));
   const filterHandler = () => {
     setFilter(!filter);
   };
@@ -25,39 +23,39 @@ const AdminPage = () => {
     const getUsers = async () => {
       try {
         onSnapshot(q, (snapshot) =>
-        setUsers(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))))
-    
+          setUsers(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+        );
+
         console.log(users);
       } catch (error) {
         console.log(error);
       }
     };
-    
+
     getUsers();
   }, []);
 
+  const blockHandler = async (user) => {
+    const userRef = doc(db, "users", user.id);
+    await setDoc(
+      userRef,
+      {
+        blocked: true,
+      },
+      { merge: true }
+    );
+  };
 
-    const blockHandler = async(user) => {
-      const userRef =  doc(db, "users", user.id);
-      await setDoc(
-        userRef,
-        {
-          blocked: true
-        },
-        { merge: true }
-      )
-    }
-
-    const unblockHandler = async(user) => {
-      const userRef =  doc(db, "users", user.id);
-      await setDoc(
-        userRef,
-        {
-          blocked: false
-        },
-        { merge: true }
-      )
-    }
+  const unblockHandler = async (user) => {
+    const userRef = doc(db, "users", user.id);
+    await setDoc(
+      userRef,
+      {
+        blocked: false,
+      },
+      { merge: true }
+    );
+  };
 
   return (
     <>
@@ -76,20 +74,20 @@ const AdminPage = () => {
         </div>
 
         <div className={classes.admin_content}>
-          {users.length && users.map((user) => (
-            <div className={classes.user_row}>
-              <img
-                className={classes.admin_avatar}
-                src={user.image}
-              ></img>
-              <p>
-               { `${user.lastName} ${user.firstName}`}
-              </p>{" "}
-              <p>{user.username}</p> <p>{user.email}</p> <p>{user.birthDay}</p>{" "}
-              <p>User</p>
-            <BlockButton unblockHandler={unblockHandler} blockHandler={blockHandler} user={user} />
-            </div>
-          ))}
+          {users.length &&
+            users.map((user) => (
+              <div className={classes.user_row}>
+                <img className={classes.admin_avatar} src={user.image}></img>
+                <p>{`${user.lastName} ${user.firstName}`}</p>
+                <p>{user.username}</p> <p>{user.email}</p>
+                <p>{user.birthDay}</p> <p>User</p>
+                <BlockButton
+                  unblockHandler={unblockHandler}
+                  blockHandler={blockHandler}
+                  user={user}
+                />
+              </div>
+            ))}
         </div>
       </div>
       ;

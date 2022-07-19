@@ -1,17 +1,16 @@
 import React from "react";
-
 import classes from "../styles/LoginRegister.module.css";
 import { Link } from "react-router-dom";
 import MotionDiv from "../Layout/MotionDiv";
 import { useFormik } from "formik";
 import { collection, addDoc } from "firebase/firestore";
-import { basicSchema } from "../../schemas/register-schema";
+import { registerSchema } from "../../schemas/register-schema";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase-config";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const usersCollectionRef = collection(db, "users");
 
   const onSubmit = async (values, actions) => {
@@ -30,12 +29,12 @@ const Register = () => {
       image: values.image,
       cover: values.cover,
       admin: values.admin,
-      blocked: false
+      blocked: false,
     });
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
     actions.resetForm();
-    navigate('/')
+    navigate("/");
   };
   const {
     values,
@@ -56,12 +55,12 @@ const Register = () => {
       birthDay: "",
       user: "",
       admin: false,
-      image: '',
-      cover:''
-      
+      image: "",
+      cover: "",
     },
-    validationSchema: basicSchema,
+    validationSchema: registerSchema,
     onSubmit,
+    validateOnChange: false,
   });
 
   console.log(errors);
@@ -204,23 +203,23 @@ const Register = () => {
               </p>
             </div>
             <div>
-                  <input
-                    name="image"
-                    className={classes.input}
-                    placeholder="Add Avatar Url..."
-                    value={values.image}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div>
-                  <input
-                    name="cover"
-                    className={classes.input}
-                    placeholder="Add Cover Url..."
-                    value={values.cover}
-                    onChange={handleChange}
-                  />
-                </div>
+              <input
+                name="image"
+                className={classes.input}
+                placeholder="Add Avatar Url..."
+                value={values.image}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <input
+                name="cover"
+                className={classes.input}
+                placeholder="Add Cover Url..."
+                value={values.cover}
+                onChange={handleChange}
+              />
+            </div>
             <div className={classes.two_rows_checkbox}>
               <input
                 className={classes.check}
@@ -228,7 +227,6 @@ const Register = () => {
                 name="admin"
                 value={values.admin === true}
                 onChange={handleChange}
-                
               />
               <label htmlFor="admin">Admin</label>
             </div>
