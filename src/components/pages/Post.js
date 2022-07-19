@@ -1,5 +1,4 @@
 import React from "react";
-
 import Navbar from "../Layout/Navbar";
 import classes from "../styles/HomePost.module.css";
 import { Link, useParams } from "react-router-dom";
@@ -13,7 +12,6 @@ import {
   where,
   addDoc,
   onSnapshot,
-  deleteDoc,
   doc,
   setDoc,
   increment,
@@ -31,12 +29,11 @@ const Post = () => {
   const { postId } = useParams();
   const [isModal, setIsModal] = useState(false);
   const [delCom, setDelCom] = useState({});
-  const [insights, setInsights] = useState({});
 
   const postsCollectionRef = collection(db, "posts");
   const usersCollectionRef = collection(db, "users");
   const commentsCollectionRef = collection(db, "comments");
-  const insightsCollectionRef = collection(db, "insights");
+
   let todayDate = new Date().toISOString().slice(0, 10);
 
   useEffect(() => {
@@ -44,8 +41,6 @@ const Post = () => {
       const profile = query(postsCollectionRef, where("id1", "==", postId));
       const querySnapshot = await getDocs(profile);
       querySnapshot.forEach((doc) => setPostsInfo(doc.data()));
-
-      //setPostsInfo(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     const getCurrentUser = async () => {
       const q = query(
@@ -68,8 +63,6 @@ const Post = () => {
     getComments();
   }, []);
 
-
-
   const commentHandler = async () => {
     await addDoc(commentsCollectionRef, {
       text: comment,
@@ -78,28 +71,22 @@ const Post = () => {
         id: current.id,
         username: current.username,
         image: current.image,
-       
       },
       post: {
         id: postsInfo.id1,
       },
     });
-    console.log(postsInfo.id1);
-
     const docRef = doc(db, "insights", postsInfo.author.id);
     await setDoc(
       docRef,
       {
         author: {
           comments: increment(1),
-          id: postsInfo.author.id
-         
+          id: postsInfo.author.id,
         },
       },
       { merge: true }
     )
-      .then((docRef) => console.log("success"))
-      .catch((error) => console.log(error));
     setComment("");
   };
   const deleteComHandler = async (com) => {
@@ -111,14 +98,11 @@ const Post = () => {
       {
         author: {
           comments: increment(-1),
-          id: postsInfo.author.id
-          
+          id: postsInfo.author.id,
         },
       },
       { merge: true }
     )
-      .then((docRef) => console.log("success"))
-      .catch((error) => console.log(error));
   };
   return (
     <>
@@ -165,7 +149,6 @@ const Post = () => {
               ></img>
               <h4>
                 <Link to={`/${postsInfo?.author && postsInfo.author.id}`}>
-                  {" "}
                   <b>@{postsInfo.author && postsInfo.author.username}</b>
                 </Link>
               </h4>
@@ -192,7 +175,6 @@ const Post = () => {
             </div>
           </div>
           <div className={classes.scroll}>
-            {" "}
             {allComments?.length &&
               allComments.map((com) => (
                 <Comments

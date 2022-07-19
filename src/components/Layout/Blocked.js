@@ -1,17 +1,15 @@
 import React from "react";
 import classes from "../styles/CommonStyles.module.css";
 import MotionDiv from "./MotionDiv";
-import { FiFrown, FiXCircle } from "react-icons/fi";
+import { FiFrown} from "react-icons/fi";
 
 const Blocked = () => {
   return (
     <MotionDiv>
-       <div className={classes.overlay_modal} />
+      <div className={classes.overlay_modal} />
       <div className={classes.error_container}>
         <div className={classes.error_content}>
-          <div className={classes.x}>
-         
-          </div>
+          <div className={classes.x}></div>
           <FiFrown className={classes.sad_smile} />
           <div>
             {

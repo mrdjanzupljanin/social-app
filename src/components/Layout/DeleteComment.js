@@ -1,28 +1,31 @@
 import React from "react";
 import classes from "../styles/CommonStyles.module.css";
 import MotionDiv from "./MotionDiv";
-import { BsQuestionDiamondFill} from "react-icons/bs";
-import { collection, deleteDoc, doc, query, where, getDocs } from "firebase/firestore";
+import { BsQuestionDiamondFill } from "react-icons/bs";
+import {
+  collection,
+  deleteDoc,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../../firebase-config";
 
 const DeleteComment = ({ text, setIsModal, delCom }) => {
- const modalHandler = () => {
-  setIsModal(false)
- 
- }
+  const modalHandler = () => {
+    setIsModal(false);
+  };
 
- const deleteCommentHandler = async() => {
-  const commentsCollectionRef = collection(db, "comments");
-  const profile = query(
-    commentsCollectionRef,
-    where("text", "==", delCom.text)
-  )
-  const querySnapshot = await getDocs(profile);
-  querySnapshot.forEach((doc) => deleteDoc(doc.ref));
-  setIsModal(false)
-  
-  
- }
+  const deleteCommentHandler = async () => {
+    const commentsCollectionRef = collection(db, "comments");
+    const profile = query(
+      commentsCollectionRef,
+      where("text", "==", delCom.text)
+    );
+    const querySnapshot = await getDocs(profile);
+    querySnapshot.forEach((doc) => deleteDoc(doc.ref));
+    setIsModal(false);
+  };
   return (
     <MotionDiv>
       <div onClick={modalHandler} className={classes.overlay_modal} />
@@ -35,8 +38,15 @@ const DeleteComment = ({ text, setIsModal, delCom }) => {
             </p>
           </div>
           <div className={classes.two_rows}>
-            <button className={classes.btn_del_no} onClick={modalHandler}>No</button>{" "}
-            <button className={classes.btn_del_yes} onClick={deleteCommentHandler}>Yes</button>
+            <button className={classes.btn_del_no} onClick={modalHandler}>
+              No
+            </button>
+            <button
+              className={classes.btn_del_yes}
+              onClick={deleteCommentHandler}
+            >
+              Yes
+            </button>
           </div>
         </div>
       </div>

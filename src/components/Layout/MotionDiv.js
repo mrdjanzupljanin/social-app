@@ -1,5 +1,4 @@
 import React from "react";
-
 import classes from "../styles/motionDiv.module.css";
 import { motion } from "framer-motion";
 

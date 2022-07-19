@@ -1,56 +1,41 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import classes from "../styles/CommonStyles.module.css";
 import { TiThumbsUp, TiThumbsDown, TiDocumentText } from "react-icons/ti";
-import { auth, db } from "../../firebase-config";
 import {
   arrayUnion,
   doc,
   setDoc,
   arrayRemove,
-  onSnapshot,
-} from "firebase/firestore";
-import {
   increment,
-
-  where,
-  query,
-  getDocs,
-  collection,
 } from "firebase/firestore";
+import { db } from "../../firebase-config";
+import { Link } from "react-router-dom";
 
-const PostCard = ({ post, current}) => {
-
+const PostCard = ({ post, current }) => {
   const likeHandler = async () => {
     const docRef = doc(db, "posts", post.id);
-
     await setDoc(
       docRef,
       {
         likedBy: arrayUnion(current),
         author: {
-          likes:increment(1)
-        }
+          likes: increment(1),
+        },
       },
       { merge: true }
-    )
-      .then((docRef) => console.log("success"))
-      .catch((error) => console.log(error));
+    );
 
-      const docRefInsights = doc(db, "insights", post.author.id);
-      await setDoc(
-        docRefInsights,
-        {
-          author: {
-            likes: increment(1),
-            id: post.author.id
-           
-          },
+    const docRefInsights = doc(db, "insights", post.author.id);
+    await setDoc(
+      docRefInsights,
+      {
+        author: {
+          likes: increment(1),
+          id: post.author.id,
         },
-        { merge: true }
-      )
-        .then((docRef) => console.log("success"))
-        .catch((error) => console.log(error));
+      },
+      { merge: true }
+    );
   };
 
   const dislikeHandler = async () => {
@@ -60,32 +45,23 @@ const PostCard = ({ post, current}) => {
       {
         likedBy: arrayRemove(current),
         author: {
-          likes: increment(-1)
-        }
+          likes: increment(-1),
+        },
       },
       { merge: true }
-    )
-      .then((docRef) => {
-        console.log("success");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    );
 
-      const docRefInsights = doc(db, "insights", post.author.id);
-      await setDoc(
-        docRefInsights,
-        {
-          author: {
-            likes: increment(-1),
-            id: post.author.id
-           
-          },
+    const docRefInsights = doc(db, "insights", post.author.id);
+    await setDoc(
+      docRefInsights,
+      {
+        author: {
+          likes: increment(-1),
+          id: post.author.id,
         },
-        { merge: true }
-      )
-        .then((docRef) => console.log("success"))
-        .catch((error) => console.log(error));
+      },
+      { merge: true }
+    );
   };
 
   return (
@@ -122,7 +98,7 @@ const PostCard = ({ post, current}) => {
             className={classes.icon}
             onClick={likeHandler}
           ></TiThumbsUp>
-          <TiThumbsDown className={classes.icon} onClick={dislikeHandler} />{" "}
+          <TiThumbsDown className={classes.icon} onClick={dislikeHandler} />
           <TiDocumentText className={classes.icon} />
           <div className={classes.number_likes}>
             <p>
@@ -143,7 +119,7 @@ const PostCard = ({ post, current}) => {
               </span>
             </p>
           </div>
-        </div>{" "}
+        </div>
         <div>
           <p className={classes.card_place}>Place Name({post.place})</p>
         </div>
